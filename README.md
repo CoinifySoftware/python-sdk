@@ -151,7 +151,7 @@ except requests.exceptions.ConnectionError as e:
     # Handle exception
 ```
 
-If no exception is thrown, the result (`response`) is a dict, and the [response format](https://coinify.com/docs/api/#response-format) from the API documentation is used, which can communicate an error (if `response['success']` is `false`) or a successful API call (if `response['success']` is `true`).
+If no exception is thrown, the result (`response`) is a dict, and the [response format](https://coinify.com/docs/api/#response-format) from the API documentation is used, which can communicate an error (if `response['success']` is `False`) or a successful API call (if `response['success']` is `True`).
 
 
 ## Validating callbacks
@@ -161,7 +161,7 @@ If you choose to receive HTTP callbacks for when your invoice state changes and 
 ipn_secret = '<my_ipn_secret>'
 callback_validator = CoinifyCallback(ipn_secret)
 
-postdata_raw = "" # Get the raw HTTP data from your web framework
+postdata_raw = "" # Get the raw HTTP data from your web framework, a JSON string
 signature = "" # Extract the contents of the 'X-Coinify-Callback-Signature' HTTP header
 
 is_valid = callback_validator.validate_callback(postdata_raw, signature)
