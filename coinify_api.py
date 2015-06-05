@@ -24,13 +24,22 @@ class CoinifyAPI:
 		self.api_secret = api_secret
 		self.api_base_url = api_base_url or self.API_DEFAULT_BASE_URL
 
-	def invoices_list( self ):
+	def invoices_list( self, limit=None, offset=None, include_expired=None ):
 		"""
-		Returns an array of all your Coinify invoices
+		Returns an array of your Coinify invoices
 
 		See https://www.coinify.com/docs/api/#list-all-invoices
 		"""
-		return self.call_api_authenticated( '/v3/invoices' )
+		query_params = {}
+
+		if limit is not None:
+			query_params['limit'] = limit
+		if offset is not None:
+			query_params['offset'] = offset
+		if include_expired is not None:
+			query_params['include_expired'] = include_expired
+
+		return self.call_api_authenticated( '/v3/invoices', query_params=query_params )
 
 	def invoice_create( self, amount, currency, plugin_name, plugin_version,
 						description=None, custom=None, callback_url=None, callback_email=None,
@@ -91,14 +100,23 @@ class CoinifyAPI:
 
 		return self.call_api_authenticated( path, 'PUT', params )
 
-	def buy_orders_list( self ):
+	def buy_orders_list( self, limit=None, offset=None, include_cancelled=None ):
 		"""
-		Returns an array of all your Coinify buy orders
+		Returns an array of your Coinify buy orders
 
 		See https://www.coinify.com/docs/api/#list-all-buy-orders
 		"""
 
-		return self.call_api_authenticated( '/v3/buys' )
+		query_params = {}
+
+		if limit is not None:
+			query_params['limit'] = limit
+		if offset is not None:
+			query_params['offset'] = offset
+		if include_cancelled is not None:
+			query_params['include_cancelled'] = include_cancelled
+
+		return self.call_api_authenticated( '/v3/buys', query_params=query_params )
 
 	def buy_order_create( self, amount, currency, btc_address, instant_order=None,
 						  callback_url=None, callback_email=None ):
@@ -142,7 +160,7 @@ class CoinifyAPI:
 
 		return self.call_api_authenticated( path )
 
-	def call_api_authenticated( self, path, method='GET', params={} ):
+	def call_api_authenticated( self, path, method='GET', params={}, query_params={} ):
 		"""
 		Perform an authenticated API call, using the
 		API key and secret provided in the constructor.
@@ -160,7 +178,7 @@ class CoinifyAPI:
 			'Content-Type': 'application/json'
 		}
 
-		r = requests.request(method, url, json=params, headers=headers)
+		r = requests.request(method, url, json=params, headers=headers, params=query_params)
 		return r.json()
 
 	def generate_authorization_header( self ):
