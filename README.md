@@ -31,21 +31,24 @@ invoices = response['data']
 ```
 
 ### Rates
-With the [Coinify rates API](https://coinify.com/docs/api/#rates) you can *list* the buy and sell rates between Bitcoin and all currencies supported by us.
-It is a public end-point and no API key and secret are required.
+With the [Coinify rates API](https://coinify.com/docs/api/#rates) you can *list* the current exchange rates for all supported currencies. 
+Returned rates will define the exchange rate for the number of fiat currency units equivalent to one BTC.
 
-`buy` is the rate for buying (asking for)  a single unit of Bitcoins for the particular currency.
-`sell` is the rate for selling (bidding for) a single unit of Bitcoins for the particular currency.
+This end-point is public and no API key/secret is needed.
+
+`buy` is the rate for buying BTC from Coinify.
+
+`sell` is the rate for selling BTC to Coinify.
 
 #### Listing rates for all currencies
 ```python
-response = api.ratesGet()
+response = api.rates_get()
 ```
 
 #### Listing rates for a specific currency
 ```python
 // f.e. currency = 'USD'
-response = api.ratesGet(currency)
+response = api.rates_get(currency)
 ```
 
 ### Invoices

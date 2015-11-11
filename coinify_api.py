@@ -159,11 +159,11 @@ class CoinifyAPI:
 
         return self.call_api_authenticated(path)
 
-    def ratesGet(self, currency=None):
+    def rates_get(self, currency=None):
         """
         Return buy and sell rates for all available currencies or for the specified currency.
         :param self:
-        :param currency: A 3-char currency code
+        :param currency|None: A 3-char currency code
         :return:
         """
         if currency is None:
