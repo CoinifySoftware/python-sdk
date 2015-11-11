@@ -30,6 +30,27 @@ if not response['success']:
 invoices = response['data']
 ```
 
+### Rates
+With the [Coinify rates API](https://coinify.com/docs/api/#rates) you can *list* the current exchange rates for all supported currencies. 
+Returned rates will define the exchange rate for the number of fiat currency units equivalent to one BTC.
+
+This end-point is public and no API key/secret is needed.
+
+`buy` is the rate for buying BTC from Coinify.
+
+`sell` is the rate for selling BTC to Coinify.
+
+#### Listing rates for all currencies
+```python
+response = api.rates_get()
+```
+
+#### Listing rates for a specific currency
+```python
+// f.e. currency = 'USD'
+response = api.rates_get(currency)
+```
+
 ### Invoices
 With the [Coinify invoice API](https://coinify.com/docs/api/#invoices), you can *list* all your invoices, *create* new invoices, *get* a specific invoice and *update* an existing invoice as follows:
 
