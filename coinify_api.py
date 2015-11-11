@@ -13,7 +13,7 @@ class CoinifyAPI:
 
     API_DEFAULT_BASE_URL = "https://api.coinify.com"
 
-    def __init__(self, api_key, api_secret, api_base_url=None):
+    def __init__(self, api_key=None, api_secret=None, api_base_url=None):
         """
         Create an instance of the CoinifyAPI class.
         Provide your API key and API secret.
@@ -159,6 +159,20 @@ class CoinifyAPI:
 
         return self.call_api_authenticated(path)
 
+    def rates_get(self, currency=None):
+        """
+        Return buy and sell rates for all available currencies or for the specified currency.
+        :param self:
+        :param currency|None: A 3-char currency code
+        :return:
+        """
+        if currency is None:
+            path = '/v3/rates'
+        else:
+            path = '/v3/rates/%s' % (currency,)
+
+        return self.call_api_authenticated(path)
+
     def balance_get(self):
         """
         Get the balance of a merchant
@@ -184,9 +198,11 @@ class CoinifyAPI:
         url = self.api_base_url + path
 
         headers = {
-            'Authorization': self.generate_authorization_header(),
             'Content-Type': 'application/json'
         }
+
+        if self.api_key is not None:
+            headers['Authorization'] = self.generate_authorization_header()
 
         r = requests.request(method, url, json=params, headers=headers, params=query_params)
         return r.json()
