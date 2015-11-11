@@ -173,6 +173,17 @@ class CoinifyAPI:
 
         return self.call_api_authenticated(path)
 
+    def balance_get(self):
+        """
+        Get the balance of a merchant
+        :param path:
+        :return: An array as described in https://www.coinify.com/docs/api/#check-account-balance . If success,
+                then the 'data' value contains the balance in BTC and fiat currency and also the base currency
+                of the merchant that requests it.
+        """
+        path = '/v3/balance'
+        return self.call_api_authenticated(path)
+
     def call_api_authenticated(self, path, method='GET', params={}, query_params={}):
         """
         Perform an authenticated API call, using the
