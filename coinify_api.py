@@ -166,7 +166,11 @@ class CoinifyAPI:
         :param currency: A 3-char currency code
         :return:
         """
-        path = '/v3/rates/%d' % (currency,)
+        if currency is None:
+            path = '/v3/rates'
+        else:
+            path = '/v3/rates/%s' % (currency,)
+
         return self.call_api_authenticated(path)
 
     def call_api_authenticated(self, path, method='GET', params={}, query_params={}):
@@ -183,9 +187,11 @@ class CoinifyAPI:
         url = self.api_base_url + path
 
         headers = {
-            'Authorization': self.generate_authorization_header(),
             'Content-Type': 'application/json'
         }
+
+        if self.api_key is not None:
+            headers['Authorization'] = self.generate_authorization_header()
 
         r = requests.request(method, url, json=params, headers=headers, params=query_params)
         return r.json()
