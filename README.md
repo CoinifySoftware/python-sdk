@@ -68,6 +68,7 @@ response = api.invoices_list()
 ```
 
 The interface for the `invoiceList` method is the following:
+
 ```python
 invoices_list()
 ```
@@ -83,10 +84,14 @@ response = api.invoice_create(20.0, "USD", plugin_name, plugin_version)
 ```
 
 The interface for the `invoice_create` method is the following:
+
 ```python
-invoice_create(amount, currency, plugin_name, plugin_version,
-    description=None, custom=None, callback_url=None, callback_email=None, 
-    return_url=None, cancel_url=None)
+invoice_create(amount, currency, 
+    plugin_name, plugin_version,
+    description=None, custom=None, 
+    callback_url=None, callback_email=None, 
+    return_url=None, cancel_url=None
+    input_currency=None, input_return_currency=None)
 ```
 
 #### Get a specific invoice
@@ -96,6 +101,7 @@ response = api.invoice_get(invoice_id)
 ```
 
 The interface for the `invoice_get` method is the following:
+
 ```python
 invoice_get(invoice_id)
 ```
@@ -107,9 +113,25 @@ response = api.invoice_update(invoice_id, 'Updated description')
 ```
 
 The interface for the `invoice_update` method is the following:
+
 ```python
 invoice_update(invoice_id, description=None, custom=None)
 ```
+
+#### Pay with another input currency
+```python
+invoice_id = 12345
+currency = 'LTC'
+return_address = 'Ler4HNAEfwYhBmGXcFP2Po1NpRUEiK8km2'
+response = api.invoice_input_create(invoice_id, currency, return_address)
+```
+
+The interface for the `invoice_input_create` method is the following:
+
+```python
+invoice_input_create(invoice_id, currency, return_address)
+```
+
 
 ### Buy orders
 With the [Coinify Buy order API](https://coinify.com/docs/api/#buy-orders), *preapproved* merchants
@@ -124,6 +146,7 @@ response = api.buy_orders_list()
 ```
 
 The interface for the `buy_orders_list` method is the following:
+
 ```python
 buy_orders_list()
 ```
@@ -165,6 +188,14 @@ response = api.buy_order_confirm(buy_order_id)
 The interface for the `buy_order_confirm` method is the following:
 ```python
 public function buy_order_confirm(buy_order_id)
+```
+
+### Input currencies
+Apart from receiving payments in Bitcoin (`BTC`), we also support a range of other input currencies such as Litecoin (`LTC`), Ether (`ETH`), and Dogecoin (`DOGE`).
+
+#### Supported input currencies
+```python
+response = api.input_currencies_list()
 ```
 
 
