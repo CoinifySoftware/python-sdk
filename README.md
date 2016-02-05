@@ -51,6 +51,17 @@ response = api.rates_get()
 response = api.rates_get(currency)
 ```
 
+#### Listing rates for all supported altcoins
+```python
+response = api.altrates_get()
+```
+
+#### Rate for a specific altcoin
+```python
+// f.e. altcoin = 'LTC'
+response = api.altrates_get(altcoin)
+```
+
 ### Account
 With the [Coinify account API](https://coinify.com/docs/api/#account) you can execute operations or get data regarding your merchant account.
 

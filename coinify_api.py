@@ -192,6 +192,20 @@ class CoinifyAPI:
 
         return self.call_api_authenticated(path)
 
+    def altrates_get(self, altcoin=None):
+        """
+        Return rates for all supported altcoins or for the specified altcoin.
+        :param self:
+        :param altcoin|None: A 3-char altcoin code
+        :return:
+        """
+        if altcoin is None:
+            path = '/v3/altrates'
+        else:
+            path = '/v3/altrates/%s' % (altcoin,)
+
+        return self.call_api_authenticated(path)
+
     def balance_get(self):
         """
         Get the balance of a merchant
