@@ -143,6 +143,42 @@ The interface for the `invoice_input_create` method is the following:
 invoice_input_create(invoice_id, currency, return_address)
 ```
 
+### Invoice refunds
+With the [Coinify Invoice refunds API](https://coinify.com/docs/api/#invoice-refunds), *preapproved* merchants can refund invoices programmatically instead of doing it manually in the merchant dashboard.
+
+#### List refunds for an invoice
+```python
+invoice_id = 12345
+response = api.invoice_refunds_list(invoice_id)
+```
+
+The interface for the `invoice_refunds_list` method is the following:
+
+```python
+invoice_refunds_list(invoice_id)
+```
+
+#### Refund invoice
+```python
+invoice_id = 12345
+# Refund 100 EUR
+amount = 100
+currency = 'EUR'
+email_address = 'customer@coinify.com'
+
+response = api.invoice_refund_create(invoice_id, amount, currency,
+	email_address)
+```
+
+The interface for the `invoice_refund_create` method is the following:
+
+```python
+invoice_refund_create(invoice_id, amount, currency,
+  email_address=None, btc_address=None,
+  use_payment_protocol_refund_address=True)
+```
+
+
 
 ### Buy orders
 With the [Coinify Buy order API](https://coinify.com/docs/api/#buy-orders), *preapproved* merchants
