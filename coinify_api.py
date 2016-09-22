@@ -118,6 +118,42 @@ class CoinifyAPI:
 
         return self.call_api_authenticated(path, 'POST', params)
 
+    def invoice_refunds_list(self, invoice_id):
+        """
+        List all refunds for an invoice.
+
+        See https://www.coinify.com/docs/api/#list-refunds-for-invoice
+        """
+        path = '/v3/invoices/%d/refunds' % (invoice_id,)
+
+        return self.call_api_authenticated(path)
+
+
+    def invoice_refund_create(self, invoice_id, amount, currency,
+                              email_address=None, btc_address=None,
+                              use_payment_protocol_refund_address=True):
+        """
+        Request a refund for an invoice
+
+        See https://www.coinify.com/docs/api/#create-refund
+        """
+        params = {
+            'amount': amount,
+            'currency': currency
+        }
+
+        if email_address is not None:
+            params['email_address'] = email_address
+        if btc_address is not None:
+            params['btc_address'] = btc_address
+        if use_payment_protocol_refund_address is not None:
+            params['use_payment_protocol_refund_address'] = use_payment_protocol_refund_address
+
+        path = '/v3/invoices/%d/refunds' % (invoice_id,)
+
+        return self.call_api_authenticated(path, 'POST', params)
+
+
     def buy_orders_list(self, limit=None, offset=None, include_cancelled=None):
         """
         Returns an array of your Coinify buy orders
