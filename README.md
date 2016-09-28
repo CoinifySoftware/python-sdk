@@ -101,8 +101,8 @@ invoice_create(amount, currency,
     plugin_name, plugin_version,
     description=None, custom=None, 
     callback_url=None, callback_email=None, 
-    return_url=None, cancel_url=None
-    input_currency=None, input_return_currency=None)
+    return_url=None, cancel_url=None,
+    input_currency=None, input_return_address=None)
 ```
 
 #### Get a specific invoice
