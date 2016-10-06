@@ -51,6 +51,17 @@ response = api.rates_get()
 response = api.rates_get(currency)
 ```
 
+#### Listing rates for all supported altcoins
+```python
+response = api.altrates_get()
+```
+
+#### Rate for a specific altcoin
+```python
+// f.e. altcoin = 'LTC'
+response = api.altrates_get(altcoin)
+```
+
 ### Account
 With the [Coinify account API](https://coinify.com/docs/api/#account) you can execute operations or get data regarding your merchant account.
 
@@ -90,8 +101,8 @@ invoice_create(amount, currency,
     plugin_name, plugin_version,
     description=None, custom=None, 
     callback_url=None, callback_email=None, 
-    return_url=None, cancel_url=None
-    input_currency=None, input_return_currency=None)
+    return_url=None, cancel_url=None,
+    input_currency=None, input_return_address=None)
 ```
 
 #### Get a specific invoice
@@ -131,6 +142,42 @@ The interface for the `invoice_input_create` method is the following:
 ```python
 invoice_input_create(invoice_id, currency, return_address)
 ```
+
+### Invoice refunds
+With the [Coinify Invoice refunds API](https://coinify.com/docs/api/#invoice-refunds), *preapproved* merchants can refund invoices programmatically instead of doing it manually in the merchant dashboard.
+
+#### List refunds for an invoice
+```python
+invoice_id = 12345
+response = api.invoice_refunds_list(invoice_id)
+```
+
+The interface for the `invoice_refunds_list` method is the following:
+
+```python
+invoice_refunds_list(invoice_id)
+```
+
+#### Refund invoice
+```python
+invoice_id = 12345
+# Refund 100 EUR
+amount = 100
+currency = 'EUR'
+email_address = 'customer@coinify.com'
+
+response = api.invoice_refund_create(invoice_id, amount, currency,
+	email_address)
+```
+
+The interface for the `invoice_refund_create` method is the following:
+
+```python
+invoice_refund_create(invoice_id, amount, currency,
+  email_address=None, btc_address=None,
+  use_payment_protocol_refund_address=True)
+```
+
 
 
 ### Buy orders
