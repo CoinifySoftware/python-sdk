@@ -309,7 +309,7 @@ class CoinifyAPI:
         message = nonce + self.api_key
 
         # Compute signature
-        signature = hmac.new(self.api_secret, msg=message, digestmod=hashlib.sha256).hexdigest()
+        signature = hmac.new(self.api_secret, msg=message.encode('utf-8'), digestmod=hashlib.sha256).hexdigest()
 
         # Construct the header value
         header_value = 'Coinify apikey="%s", nonce="%s", signature="%s"' % (self.api_key, nonce, signature)
