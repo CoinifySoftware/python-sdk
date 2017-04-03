@@ -21,7 +21,7 @@ class CoinifyAPI:
         Set api_base_url to None to use default
         """
         self.api_key = api_key
-        self.api_secret = api_secret
+        self.api_secret = str.encode(api_secret)
         self.api_base_url = api_base_url or self.API_DEFAULT_BASE_URL
 
     def invoices_list(self, limit=None, offset=None, include_expired=None):
@@ -309,7 +309,7 @@ class CoinifyAPI:
         message = nonce + self.api_key
 
         # Compute signature
-        signature = hmac.new(self.api_secret, msg=message, digestmod=hashlib.sha256).hexdigest()
+        signature = hmac.new(self.api_secret, msg=message.encode('utf-8'), digestmod=hashlib.sha256).hexdigest()
 
         # Construct the header value
         header_value = 'Coinify apikey="%s", nonce="%s", signature="%s"' % (self.api_key, nonce, signature)
