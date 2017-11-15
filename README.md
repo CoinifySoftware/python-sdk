@@ -2,7 +2,7 @@
 A Python wrapper for Coinify merchant API and callbacks
 
 This Python SDK consists of two classes, `CoinifyAPI` and `CoinifyCallback`, which are designed to make it easier for you,
-the developer, to utilize the [Coinify API](https://coinify.com/docs/api) and validate [IPN callbacks](https://coinify.com/docs/api/#callbacks) from Coinify, respectively. 
+the developer, to utilize the [Coinify API](https://merchant.coinify.com/docs/api) and validate [IPN callbacks](https://merchant.coinify.com/docs/api/#callbacks) from Coinify, respectively. 
 
 ## CoinifyAPI
 
@@ -16,7 +16,7 @@ api = CoinifyAPI(api_key, api_secret)
 ```
 
 ### Response format
-The `CoinifyAPI` returns responses as they are described in [Response format](https://coinify.com/docs/api/#response-format) in the API documentation.
+The `CoinifyAPI` returns responses as they are described in [Response format](https://merchant.coinify.com/docs/api/#response-format) in the API documentation.
 
 The JSON responses are automatically decoded into Python dict's, so you can for example do the following:
 
@@ -31,7 +31,7 @@ invoices = response['data']
 ```
 
 ### Rates
-With the [Coinify rates API](https://coinify.com/docs/api/#rates) you can *list* the current exchange rates for all supported currencies. 
+With the [Coinify rates API](https://merchant.coinify.com/docs/api/#rates) you can *list* the current exchange rates for all supported currencies. 
 Returned rates will define the exchange rate for the number of fiat currency units equivalent to one BTC.
 
 This end-point is public and no API key/secret is needed.
@@ -63,7 +63,7 @@ response = api.altrates_get(altcoin)
 ```
 
 ### Account
-With the [Coinify account API](https://coinify.com/docs/api/#account) you can execute operations or get data regarding your merchant account.
+With the [Coinify account API](https://merchant.coinify.com/docs/api/#account) you can execute operations or get data regarding your merchant account.
 
 #### Check account balance
 ```python
@@ -71,7 +71,7 @@ response = api.balance_get()
 ```
 
 ### Invoices
-With the [Coinify invoice API](https://coinify.com/docs/api/#invoices), you can *list* all your invoices, *create* new invoices, *get* a specific invoice and *update* an existing invoice as follows:
+With the [Coinify invoice API](https://merchant.coinify.com/docs/api/#invoices), you can *list* all your invoices, *create* new invoices, *get* a specific invoice and *update* an existing invoice as follows:
 
 #### Listing all invoices
 ```python
@@ -144,7 +144,7 @@ invoice_input_create(invoice_id, currency, return_address)
 ```
 
 ### Invoice refunds
-With the [Coinify Invoice refunds API](https://coinify.com/docs/api/#invoice-refunds), *preapproved* merchants can refund invoices programmatically instead of doing it manually in the merchant dashboard.
+With the [Coinify Invoice refunds API](https://merchant.coinify.com/docs/api/#invoice-refunds), *preapproved* merchants can refund invoices programmatically instead of doing it manually in the merchant dashboard.
 
 #### List refunds for an invoice
 ```python
@@ -181,7 +181,7 @@ invoice_refund_create(invoice_id, amount, currency,
 
 
 ### Buy orders
-With the [Coinify Buy order API](https://coinify.com/docs/api/#buy-orders), *preapproved* merchants
+With the [Coinify Buy order API](https://merchant.coinify.com/docs/api/#buy-orders), *preapproved* merchants
 can use their fiat account balance to buy bitcoins. The API exposes methods
 for *listing* all buy orders, *getting* a specific buy order, and *create* and *confirm*
 new buy orders:
@@ -258,7 +258,7 @@ except requests.exceptions.ConnectionError as e:
     # Handle exception
 ```
 
-If no exception is thrown, the result (`response`) is a dict, and the [response format](https://coinify.com/docs/api/#response-format) from the API documentation is used, which can communicate an error (if `response['success']` is `False`) or a successful API call (if `response['success']` is `True`).
+If no exception is thrown, the result (`response`) is a dict, and the [response format](https://merchant.coinify.com/docs/api/#response-format) from the API documentation is used, which can communicate an error (if `response['success']` is `False`) or a successful API call (if `response['success']` is `True`).
 
 
 ## Validating callbacks
