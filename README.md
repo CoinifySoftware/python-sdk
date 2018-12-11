@@ -223,7 +223,8 @@ response = api.buy_order_create( amount, currency, btc_address )
 The interface for the `buy_order_create` method is the following:
 ```python
 buy_order_create( amount, currency, btc_address, 
-    instant_order=None, callback_url=None, callback_email=None )
+    instant_order=None, callback_url=None, callback_email=None, 
+    custom=None )
 ```
 
 #### Confirming a buy order

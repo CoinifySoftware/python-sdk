@@ -173,7 +173,7 @@ class CoinifyAPI:
         return self.call_api_authenticated('/v3/buys', query_params=query_params)
 
     def buy_order_create(self, amount, currency, btc_address, instant_order=None,
-                         callback_url=None, callback_email=None):
+                         callback_url=None, callback_email=None, custom=None):
         """
         Create a new buy order
 
@@ -191,6 +191,8 @@ class CoinifyAPI:
             params['callback_url'] = callback_url
         if callback_email is not None:
             params['callback_email'] = callback_email
+        if custom is not None:
+            params['custom'] = custom
 
         return self.call_api_authenticated('/v3/buys', 'POST', params)
 
