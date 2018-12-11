@@ -2,11 +2,11 @@ import hashlib, hmac
 
 class CoinifyCallback:
 	"""
-	Class to validate callbacks from Coinfy
+	Class to validate callbacks from Coinify
 	"""
 
 	ipn_secret = None
-	"""Coinify IPN callback secret. Get yours at https://www.coinify.com/merchant/ipn"""
+	"""Coinify IPN callback secret. Get yours at https://merchant.coinify.com/merchant/ipn"""
 
 	def __init__( self, ipn_secret ):
 		self.ipn_secret = ipn_secret

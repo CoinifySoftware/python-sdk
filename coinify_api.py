@@ -3,10 +3,10 @@ import requests, json, time, hashlib, hmac
 
 class CoinifyAPI:
     api_key = None
-    """Coinify API key. Get yours at https://www.coinify.com/merchant/api"""
+    """Coinify API key. Get yours at https://merchant.coinify.com/merchant/api"""
 
     api_secret = None
-    """Coinify API secret. Get yours at https://www.coinify.com/merchant/api"""
+    """Coinify API secret. Get yours at https://merchant.coinify.com/merchant/api"""
 
     api_base_url = None
     """Base URL to the Coinify API"""
@@ -28,7 +28,7 @@ class CoinifyAPI:
         """
         Returns an array of your Coinify invoices
 
-        See https://www.coinify.com/docs/api/#list-all-invoices
+        See https://merchant.coinify.com/docs/api/#list-all-invoices
         """
         query_params = {}
 
@@ -48,7 +48,7 @@ class CoinifyAPI:
         """
         Create a new invoice.
 
-        See https://www.coinify.com/docs/api/#create-an-invoice
+        See https://merchant.coinify.com/docs/api/#create-an-invoice
         """
         params = {
             'amount': amount,
@@ -80,7 +80,7 @@ class CoinifyAPI:
         """
         Get a specific invoice
 
-        See https://www.coinify.com/docs/api/#get-a-specific-invoice
+        See https://merchant.coinify.com/docs/api/#get-a-specific-invoice
         """
         path = '/v3/invoices/%d' % (invoice_id,)
 
@@ -90,7 +90,7 @@ class CoinifyAPI:
         """
         Update the description and custom data of an invoice
 
-        See https://www.coinify.com/docs/api/#update-an-invoice
+        See https://merchant.coinify.com/docs/api/#update-an-invoice
         """
         params = {}
 
@@ -107,7 +107,7 @@ class CoinifyAPI:
         """
         Request for an invoice to be paid with another input currency.
 
-        See https://www.coinify.com/docs/api/#pay-with-another-input-currency
+        See https://merchant.coinify.com/docs/api/#pay-with-another-input-currency
         """
         params = {
             'currency': currency,
@@ -122,7 +122,7 @@ class CoinifyAPI:
         """
         List all refunds for an invoice.
 
-        See https://www.coinify.com/docs/api/#list-refunds-for-invoice
+        See https://merchant.coinify.com/docs/api/#list-refunds-for-invoice
         """
         path = '/v3/invoices/%d/refunds' % (invoice_id,)
 
@@ -135,7 +135,7 @@ class CoinifyAPI:
         """
         Request a refund for an invoice
 
-        See https://www.coinify.com/docs/api/#create-refund
+        See https://merchant.coinify.com/docs/api/#create-refund
         """
         params = {
             'amount': amount,
@@ -158,7 +158,7 @@ class CoinifyAPI:
         """
         Returns an array of your Coinify buy orders
 
-        See https://www.coinify.com/docs/api/#list-all-buy-orders
+        See https://merchant.coinify.com/docs/api/#list-all-buy-orders
         """
 
         query_params = {}
@@ -177,7 +177,7 @@ class CoinifyAPI:
         """
         Create a new buy order
 
-        See https://www.coinify.com/docs/api/#create-a-buy-order
+        See https://merchant.coinify.com/docs/api/#create-a-buy-order
         """
         params = {
             'amount': amount,
@@ -200,7 +200,7 @@ class CoinifyAPI:
         """
         Confirm a buy order
 
-        See https://www.coinify.com/docs/api/#buy-order-confirm
+        See https://merchant.coinify.com/docs/api/#buy-order-confirm
         """
         path = '/v3/buys/%d/actions/confirm' % (buy_order_id,)
 
@@ -210,7 +210,7 @@ class CoinifyAPI:
         """
         Get a specific buy order
 
-        See https://www.coinify.com/docs/api/#get-a-specific-buy-order
+        See https://merchant.coinify.com/docs/api/#get-a-specific-buy-order
         """
         path = '/v3/buys/%d' % (buy_order_id,)
 
@@ -248,7 +248,7 @@ class CoinifyAPI:
         """
         Get the balance of a merchant
         :param path:
-        :return: An array as described in https://www.coinify.com/docs/api/#check-account-balance . If success,
+        :return: An array as described in https://merchant.coinify.com/docs/api/#check-account-balance . If success,
                 then the 'data' value contains the balance in BTC and fiat currency and also the base currency
                 of the merchant that requests it.
         """
@@ -270,7 +270,7 @@ class CoinifyAPI:
         path: API path, WITH a leading slash, e.g. '/v3/invoices'
         params: dict with parameters to send with the API call
 
-        Returns a dict as described in https://www.coinify.com/docs/api/#response-format,
+        Returns a dict as described in https://merchant.coinify.com/docs/api/#response-format,
         or None if the HTTP call couldn't be performed correctly.
         """
         extra_headers = {
@@ -286,7 +286,7 @@ class CoinifyAPI:
         path: API path, WITH a leading slash, e.g. '/v3/invoices'
         params: dict with parameters to send with the API call
 
-        Returns a dict as described in https://www.coinify.com/docs/api/#response-format,
+        Returns a dict as described in https://merchant.coinify.com/docs/api/#response-format,
         or None if the HTTP call couldn't be performed correctly.
         """
         url = self.api_base_url + path
